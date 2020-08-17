@@ -130,3 +130,95 @@ function lowestPriceInCities(input) {
 }
 
 //Exercise 6:
+
+class Person {
+    constructor(firstName, lastName, age, email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.email = email;
+    }
+
+    toString() {
+        return `${this.firstName} ${this.lastName} (age: ${this.age}, email: ${this.email})`
+    }
+}
+
+// Exercise 7: 
+
+function getPersons() {
+    class Person {
+        constructor(firstName, lastName, age, email) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.age = age;
+            this.email = email;
+        }
+    
+        toString() {
+            return `${this.firstName} ${this.lastName} (age: ${this.age}, email: ${this.email})`
+        }
+    }
+    return [
+        new Person("Maria", "Petrova", 22, "mp@yahoo.com"),
+        new Person("SoftUni"),
+        new Person("Stephan", "Nikolov", 25),
+        new Person("Peter", "Kolev", 24, "ptr@gmail.com")
+    ]
+
+}
+
+//Exercise 8:
+
+function circleArea() {
+    class Circle {
+        constructor(radius) {
+            this.radius = radius;
+        }
+
+        get diameter() {
+            return this.radius * 2;
+        }
+
+        set diameter(diameter) {
+            this.radius = diameter / 2;
+        }
+
+        get area() {
+            return Math.PI * this.radius * this.radius;
+        }
+    }
+}
+
+// Exercise 9:
+
+function distanceClass(){
+    class Distance {
+        constructor(x, y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        static distance(p1, p2) {
+            let x1 = p1.x;
+            let x2 = p1.y;
+
+            let y1 = p2.x;
+            let y2 = p2.y;
+            let result = Math.sqrt((x1 - y1) ** 2 + (x2 - y2) ** 2);
+
+            return result;
+        }
+    }
+
+    let p1 = new Distance(5, 5);
+let p2 = new Distance(9, 8);
+
+let distance = Distance.distance(p1, p2);
+
+console.log(distance);
+}
+
+distanceClass();
+
+
