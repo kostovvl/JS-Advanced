@@ -145,14 +145,130 @@ function cappyJuice(input) {
 
     }
 
-    autoEngineeringCompany(['Audi | Q7 | 1000',
-    'Audi | Q6 | 100',
-    'BMW | X5 | 1000',
-    'BMW | X6 | 100',
-    'Citroen | C4 | 123',
-    'Volga | GAZ-24 | 1000000',
-    'Lada | Niva | 1000000',
-    'Lada | Jigula | 1000000',
-    'Citroen | C4 | 22',
-    'Citroen | C5 | 10']
-    );
+   //Exercise 6:
+
+   function systemComponents(input) {
+
+    let result = {};
+
+    input.forEach(item => {
+        let tokens = item.split(' | ');
+        let systemiStr = tokens[0];
+        let componentStr = tokens[1];
+        let subcomponentStr = tokens[2];
+
+        let exisstingSystems = [];
+         exisstingSystems = Object.keys(result);
+        if (!exisstingSystems.includes(systemiStr)) {
+            let subComponent = {};
+            subComponent[subcomponentStr] = true;
+            let component = {};
+            component[componentStr] = subComponent;
+            result[systemiStr] = component;
+        } else {
+            let existingComponents = {};
+
+            existingComponents = Object.keys(result[systemiStr]);
+
+            if (!existingComponents.includes(componentStr)) {
+                let subComponent = {};
+                subComponent[componentStr] = true;
+                let component = {};
+                component[subcomponentStr] = subComponent;
+            result[systemiStr][componentStr] = component;
+            } else {
+                result[systemiStr][componentStr][subcomponentStr] = true;
+            }
+        }
+    })
+
+    let orderedSystems = {};
+   orderedSystems = Object.keys(result);
+   orderedSystems.sort(function order(key1, key2) { 
+       let rresult = 0;
+       let keys1Length = Object.keys(result[key1]).length;
+       let keys2Length = Object.keys(result[key2]).length;
+       rresult = keys2Length - keys1Length;
+       if (rresult == 0) {
+           rresult =  key1.localeCompare(key2) ;
+       }
+     return rresult; 
+     });
+    
+   orderedSystems.forEach(system => {
+       console.log(`${system}`)
+       let orderedComponents = {};
+        orderedComponents = Object.keys(result[system]).sort(function order(key1, key2) { 
+            let rresult = 0;
+            let keys1Length = Object.keys(result[system][key1]).length;
+            let keys2Length = Object.keys(result[system][key2]).length;
+            rresult = keys2Length - keys1Length;
+        return  rresult;
+    });
+    orderedComponents.forEach(component => {
+        console.log(`|||${component}`);
+        let subComponents = {};
+        subComponents = Object.keys(result[system][component]);
+        subComponents.forEach(subComponent => {
+            console.log(`||||||${subComponent}`);
+        })
+    })
+   })
+}
+
+  //Exercise 7:
+
+  class Request{
+      constructor(method, uri, version, message){
+          this.method = method;
+          this.uri = uri;
+          this.version = version;
+          this.message = message;
+          this.response = undefined;
+          this.fulfilled = false;
+      }
+  }
+
+  //Exercise 8:
+
+  
+
+  function sortTickets(inputArr, sortParam) {
+    class Ticket{
+        constructor(destination, price, status){
+            this.destination = destination;
+            this.price = price;
+            this.status = status;
+        }
+    }
+
+    let dataBase = [];
+
+    inputArr.forEach(ticket => {
+        let ticketArr = ticket.split('|');
+        let destination = ticketArr[0];
+        let price = Number(ticketArr[1]);
+        let status = ticketArr[2];
+
+        let ticketObj = new Ticket(destination, price, status);
+        dataBase.push(ticketObj);
+    })
+
+    dataBase.sort(function(a, b){
+        if (sortParam !== 'price') {
+        return a[sortParam].localeCompare(b[sortParam]);
+    } else {
+        return a[sortParam] - b[sortParam];
+    }
+    })
+
+   return dataBase;
+
+  }
+
+  sortTickets(['Philadelphia|94.20|available',
+  'New York City|95.99|available',
+  'New York City|95.99|sold',
+  'Boston|126.20|departed'],
+ 'price'
+ )
