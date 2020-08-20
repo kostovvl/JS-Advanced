@@ -1,30 +1,28 @@
 function growingWord() {
 
-  let growingWord =
-   document.querySelector('#exercise > p');
-   let px = 8;
-   let colorChanges = {
-     'blue' : 'green',
-     'green' : 'red',
-     'red' : 'blue'
-   }
+  let px = 8;
+  let color = {
+    "blue" : "green",
+    "green" : "red",
+    "red" : "blue"
+  }
 
-   if (!growingWord.hasAttribute("style")) {
-     growingWord.setAttribute("style", `color: blue; font-size: ${px}px`) 
-   } else {
-     let currentPx = growingWord.style["font-size"];
-      px = currentPx.substring(0, currentPx.length - 2) * 2;
-      if (px >= 64) {
-        px = 8;
-      }
-     let currentColor = growingWord.style["color"];
-
-     
- 
-
-     growingWord.setAttribute("style", 
-     `color : ${colorChanges[currentColor]}; font-size : ${px}px`)
-   }
-
+  let word = document.querySelector('#exercise > p')
   
+  if (!word.attributes["style"]) {
+    word.setAttribute("style", `color: blue; font-size: ${px}px`)
+
+  } else {
+    let newColor = color[word.style["color"]];
+    let pixels = word.style["font-size"];
+    let newPixels = pixels.substring(0, pixels.length - 2) * 2;
+    if (newPixels >= 64) {
+      newPixels = 8;
+    }
+
+    word.setAttribute("style", 
+    `color: ${newColor}; font-size: ${newPixels}px`);
+
+  }
+
 }

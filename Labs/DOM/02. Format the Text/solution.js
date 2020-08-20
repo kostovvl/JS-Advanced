@@ -1,25 +1,25 @@
 function solve() {
-  const input =
-   document.querySelector('#input');
-  const outpurString =
-   document.querySelector('#output');
 
-   const inputStringArr = 
-   input.innerText.split('. ');
+  let inputArr = Array.from(document.querySelector('#input')
+  .innerHTML.split('. '));
 
-   let inputParagraph = document.createElement('p');
-   let counter = 0;
-   for(let i = 0; i < inputStringArr.length; i++) {
-     counter++;
-     inputParagraph.innerText += inputStringArr[i];
-     if (counter % 3 === 0) {
-       outpurString.appendChild(inputParagraph);
-       inputParagraph = document.createElement('p');
-       counter = 0;
-     }
-   }
+  let output = document.querySelector('#output');
 
-   if (counter > 0) {
-    outpurString.appendChild(inputParagraph);
-   }
+  let counter = 0;
+  let paragraph = document.createElement('p');
+
+  for(let i = 0; i < inputArr.length; i++) {
+    counter++;
+    paragraph.innerHTML += inputArr[i];
+    if (counter % 3 === 0) {
+      output.appendChild(paragraph);
+      paragraph = document.createElement('p');
+      counter = 0;
+    }
+  }
+
+  if (counter < 3) {
+    output.appendChild(paragraph);
+  }
+
 }
