@@ -266,9 +266,62 @@ function cappyJuice(input) {
 
   }
 
-  sortTickets(['Philadelphia|94.20|available',
-  'New York City|95.99|available',
-  'New York City|95.99|sold',
-  'Boston|126.20|departed'],
- 'price'
- )
+  //Exercise 9:
+
+  class SortedList{
+      constructor(){
+          this.list = [];
+          this.size = 0;
+      }
+      add(number) {
+          this.list.push(number);
+          this.list.sort(function(a, b) {return a - b});
+          this.size = this.list.length;
+      }
+
+      remove(index) {
+          if (index >= 0 || index <= this.list.size) {
+            this.list.splice(index, 1);
+            this.list.sort(function(a, b) {return a - b});
+            this.size = this.list.length;
+          }
+      }
+
+      get(index) {
+          if (index < 0 || index > this.size) {
+              return undefined;
+          }
+          return this.list[index];
+      }
+  }
+
+ class Stringer{
+     constructor(string, length) {
+         this.innerString = string;
+         this.innerLength = length;
+     }
+
+     decrease(margin) {
+         this.innerLength -= margin;
+         if (this.innerLength < 0) {
+             this.innerLength = 0;
+         }
+     }
+
+     increase(margin) {
+         this.innerLength += margin;
+     }
+     
+     toString() {
+         if (this.innerLength < this.innerString.length) {
+         return this.innerString.substring(0, this.innerLength) + '...';
+        } else {
+            return this.innerString;
+        }
+     }
+ }
+
+ let test = new Stringer('test', 5);
+ test.decrease(3)
+ test.increase(10)
+ console.log(test.toString());
