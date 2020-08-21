@@ -14,19 +14,6 @@ function solve() {
     let result = 
     document.querySelector('#result');
 
-    let isBinary = 
-    chechIfNumIsBinary(input);
-
-    if (from === 'binary' && !isBinary) {
-        alert('Number is not Binary format!')
-        return;
-    }
-
-    if (from === 'decimal' && isBinary) {
-        alert('Number is not Binary format!')
-        return;
-    }
-
     if (from === to) {
         result.value = input;
     } else {
@@ -65,14 +52,5 @@ function solve() {
             bits *= 2;
         }
         return decimal;
-    }
-
-    function chechIfNumIsBinary(input) {
-        const regex = new RegExp('[01]+');
-    if (regex.test(input) && input.substring(0, 1) !== '0') {
-        return true;
-    } else {
-        return false;
-    }
     }
 }
