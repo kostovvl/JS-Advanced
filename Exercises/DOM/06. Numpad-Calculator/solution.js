@@ -1,20 +1,74 @@
 function solve() {
+document.querySelector('.keys')
+.addEventListener('click', onClick);
 
-    let keyboard = 
-    document.querySelector('.keys');
+document.querySelector('.clear')
+.addEventListener('click', onErase);
 
-    keyboard.addEventListener('click', function(e){
+let memory = {
+    first : '',
+    second : '',
+    operator : ''
+}
 
-        let currentPress = e.eventPhase;
-        let expressionOutput = 
-        document.getElementById('expressionOutput');
+let expressionOutput = 
+document.querySelector('#expressionOutput')
 
-        if (currentPress === 'c') {
-            expressionOutput.innerText = '';
-        } else {
-            expressionOutput.innerText += currentPress;
+let result = 
+document.querySelector('#resultOutput');
+
+function onClick(e) {
+    const input = e.target.value;
+
+    if (input === '/' || input === '*' 
+    || input === '-' || input === '+') {
+
+        if (memory.operator !== '') {
+            result.innerText = operate(memory.first, 
+                memory.second, memory.operator);
+                eraseMemory();
+                memory.first = result.innerText;
         }
 
-    })
+        memory.operator = input;
+
+    } else if (input === '='){
+        result.innerText = operate(memory.first, 
+            memory.second, memory.operator);
+        
+    } else {
+        if (memory.operator === '') {
+            memory.first += input;
+        } else {
+            memory.second += input;
+        }
+    }
+
+    if (input !== '=') {
+    expressionOutput.innerText += input;
+}
+
+}
+
+function operate(firstNum, secondNum, opr) {
+    switch (opr) {
+        case '/': return +firstNum / +secondNum; break;
+        case '*': return +firstNum * +secondNum; break;
+        case '-': return +firstNum - +secondNum; break;
+        case '+': return +firstNum + +secondNum; break;
+    }
+}
+
+function onErase() {
+    result.innerText = '';
+    expressionOutput.innerText = '';
+    eraseMemory();
+}
+
+function eraseMemory() {
+    memory.first = '';
+    memory.second = '';
+    memory.operator = '';
+}
 
 }
