@@ -20,7 +20,13 @@ function solve() {
         if (from === 'decimal') {
             result.value = decimalToBinary(input);
         } else {
-            result.value = binaryToDecimal(input)
+            const output = binaryToDecimal(input);
+            if (output === 0) {
+                alert('Number is not Binary format');
+                return;
+            }
+
+            result.value = output;
         }
     } 
     }
