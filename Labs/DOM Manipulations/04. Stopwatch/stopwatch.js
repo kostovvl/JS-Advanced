@@ -22,7 +22,22 @@ let id;
             if (minutes === 60) {
                 minutes = 0;
             }
-            time.innerText = `${minutes} : ${seconds}`;
+            let minutesStr = '';
+            if (minutes < 10) {
+                minutesStr = `0${minutes}`
+            } else {
+                minutesStr = `${minutes}`
+            } 
+
+            let secondsStr = '';
+            if (seconds < 10) {
+                secondsStr = `0${seconds}`
+            } else {
+                secondsStr = `${seconds}`
+            }
+            
+            time.innerText = `${minutesStr}:${secondsStr
+            }`;
         }, 1000); 
     }
 
